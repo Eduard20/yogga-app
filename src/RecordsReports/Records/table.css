@@ -1,0 +1,37 @@
+.table {
+    width: 91%;
+    margin: 38px 36px;
+}
+ul.ant-table-pagination {
+    display: none;
+}
+.records {
+    overflow: hidden;
+}
+.records .left{
+    float: left
+}
+.records .right{
+    float: left;
+    margin-top: 38px;
+    padding-left: 18px;
+}
+.addRec button {
+    padding: 10px 16px;
+    outline: none;
+    border-radius: 11px;
+    background: #108ee9;
+    border: none;
+    color: white;
+}
+.menu {
+    margin-bottom: 15px;
+    border-bottom: 1px solid;
+    width: 186px;
+    padding-left: 10px;
+    padding-bottom: 6px;
+}
+.menu a{
+    margin-right: 10px;
+    outline: none;
+}
