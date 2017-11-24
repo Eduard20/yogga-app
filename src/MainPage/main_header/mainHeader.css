@@ -1,0 +1,11 @@
+.root header {
+    overflow: hidden;
+    border-bottom: 1px solid;
+    padding: 21px 26px;
+}
+.root header h2{
+    float: left;
+}
+.root header .form {
+    float: right;
+}
