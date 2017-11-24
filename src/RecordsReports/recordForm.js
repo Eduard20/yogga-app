@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import './form.css'
+import { LocaleProvider } from 'antd';
+import enUS from 'antd/lib/locale-provider/en_US';
 
 import { Form, Input, Button,DatePicker,TimePicker } from 'antd';
 import moment from 'moment';
@@ -50,7 +52,10 @@ class RegistrationForm extends React.Component {
                         {...formItemLayout}
                         hasFeedback
                     >
-                        <DatePicker defaultValue={moment('08/08/2017', dateFormat)} format={dateFormat} placeholder='Date'/>
+
+                        <LocaleProvider locale={enUS}>
+                            <DatePicker defaultValue={moment('08/08/2017', dateFormat)} format={dateFormat} placeholder='Date'/>
+                        </LocaleProvider>
 
                     </FormItem>
                     <FormItem
