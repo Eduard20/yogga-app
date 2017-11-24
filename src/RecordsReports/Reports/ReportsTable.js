@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 
 import { Table, Icon } from 'antd';
+import { Link } from 'react-router-dom';
 
 import '../table.css'
 
@@ -43,8 +44,12 @@ class ReportsTable extends Component {
         return(
             <div className="tableRep">
                 <div className="menu">
-                    <a href="/">Records</a>
-                    <a href="/reports">Reports</a>
+                    <a>
+                        <Link to={'/'}>Reports</Link>Records
+                    </a>
+                    <a>
+                        <Link to={'/reports'}>Reports</Link>
+                    </a>
                 </div>
                 <Table columns={columns} dataSource={data} />
             </div>

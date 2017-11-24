@@ -17,7 +17,7 @@ ul.ant-table-pagination {
     padding-left: 18px;
 }
 .addRec a {
-    padding: 10px 16px;
+    padding: 7px 10px;
     outline: none;
     display: inline-block;
     border-radius: 11px;
@@ -38,4 +38,7 @@ ul.ant-table-pagination {
 .tableRep {
     width: 44%;
     margin: 38px 36px;
+}
+.ant-table-thead > tr > th, .ant-table-tbody > tr > td {
+    text-align: center;
 }
