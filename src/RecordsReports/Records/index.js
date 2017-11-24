@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import RecordsTable from './RecordsTable'
 import Header from '../header'
 import AddRecord from './addRecord'
-import './table.css'
+import '../table.css'
 
 class Records extends Component {
     render() {

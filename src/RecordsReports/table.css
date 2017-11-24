@@ -16,12 +16,12 @@ ul.ant-table-pagination {
     margin-top: 38px;
     padding-left: 18px;
 }
-.addRec button {
+.addRec a {
     padding: 10px 16px;
     outline: none;
+    display: inline-block;
     border-radius: 11px;
     background: #108ee9;
-    border: none;
     color: white;
 }
 .menu {
@@ -34,4 +34,8 @@ ul.ant-table-pagination {
 .menu a{
     margin-right: 10px;
     outline: none;
+}
+.tableRep {
+    width: 44%;
+    margin: 38px 36px;
 }

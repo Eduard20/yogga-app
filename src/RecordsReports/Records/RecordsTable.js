@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 
 import { Table, Icon } from 'antd';
 
-import './table.css'
+import '../table.css'
 
 const columns = [{
     title: 'Date',
@@ -31,32 +31,32 @@ const data = [{
     dist: 1000,
     time: '00:05:27',
     speed: '11.01',
-    edit: <Icon type="edit" style={{ fontSize: 16, color: '#08c' }} />,
-    del: <Icon type="delete" style={{ fontSize: 16, color: '#08c' }} />
+    edit: <a href="edit"><Icon type="edit" style={{ fontSize: 16, color: '#08c' }} /></a>,
+    del: <a href=""><Icon type="delete" style={{ fontSize: 16, color: '#08c' }} /></a>
 }, {
     key: '2',
     date: '09.08.2017',
     dist: 1000,
     time: '00:05:11',
     speed: '11.57',
-    edit: <Icon type="edit" style={{ fontSize: 16, color: '#08c' }} />,
-    del: <Icon type="delete" style={{ fontSize: 16, color: '#08c' }} />
+    edit: <a href="edit"><Icon type="edit" style={{ fontSize: 16, color: '#08c' }} /></a>,
+    del: <a href=""><Icon type="delete" style={{ fontSize: 16, color: '#08c' }} /></a>
 }, {
     key: '3',
     date: '10.08.2017',
     dist: 1000,
     time: '00:04:44',
     speed: '12.68',
-    edit: <Icon type="edit" style={{ fontSize: 16, color: '#08c' }} />,
-    del: <Icon type="delete" style={{ fontSize: 16, color: '#08c' }} />
+    edit: <a href="edit"><Icon type="edit" style={{ fontSize: 16, color: '#08c' }} /></a>,
+    del: <a href=""><Icon type="delete" style={{ fontSize: 16, color: '#08c' }} /></a>
 }, {
     key: '4',
     date: '11.08.2017',
     dist: 2000,
     time: '00:09:50',
     speed: '12.20',
-    edit: <Icon type="edit" style={{ fontSize: 16, color: '#08c' }} />,
-    del: <Icon type="delete" style={{ fontSize: 16, color: '#08c' }} />
+    edit: <a href="edit"><Icon type="edit" style={{ fontSize: 16, color: '#08c' }} /></a>,
+    del: <a href=""><Icon type="delete" style={{ fontSize: 16, color: '#08c' }} /></a>
 }];
 
 class RecordsTable extends Component {
