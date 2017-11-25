@@ -108,6 +108,10 @@ const queries = {
                 if (!_.isEmpty(doc)) return next(null, doc);
                 return next({ message: text.tokenNotFound });
             }, err => next(err));
+    },
+
+    addRecord: (data, next) => {
+        RecordsModel.create(data, (err, doc) => err ? next(err) : next(err, doc));
     }
 
 };
