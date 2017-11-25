@@ -6,7 +6,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const winston = require('winston');
-// const webpack = require('webpack');
 const logger = require('morgan');
 const config = require('./config');
 const auth = require('./middlewares/auth').isAuth;
@@ -16,14 +15,6 @@ const routes = require('./routes/index');
 const api = require('./routes/api');
 
 const app = express();
-// const webPackConfig = require('./webpack.config');
-//
-// const compiler = webpack(webPackConfig);
-//
-// app.use(require('webpack-dev-middleware')(compiler, {
-//     publicPath: webPackConfig.output.publicPath
-// }));
-// app.use(require('webpack-hot-middleware')(compiler));
 /**
  * Authentication Middleware
  */
