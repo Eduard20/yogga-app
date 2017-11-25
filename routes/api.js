@@ -18,12 +18,12 @@ router.post('/record', (req, res) => {
     recordFunction.add(req.body, result => res.send(result));
 });
 
-router.put('/record', (req, res) => {
-    recordFunction.edit(req.body, result => res.send(result));
+router.put('/record/:id', (req, res) => {
+    recordFunction.edit(req.params.id, req.body, result => res.send(result));
 });
 
-router.delete('/record', (req, res) => {
-    recordFunction.delete(req.body, result => res.send(result));
+router.delete('/record/:id', (req, res) => {
+    recordFunction.delete(req.params.id, result => res.send(result));
 });
 
 module.exports = router;

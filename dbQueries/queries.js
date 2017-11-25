@@ -122,12 +122,13 @@ const queries = {
 
     /**
      * Edit Record
+     * @param {String} id
      * @param {Object} data
      * @param {Function} next
      */
 
-    editRecord: (data, next) => {
-        RecordsModel.update({ _id: data._id }, data, err => err ? next(err) : next(err, data));
+    editRecord: (id, data, next) => {
+        RecordsModel.update({ _id: id }, data, err => err ? next(err) : next(err, data));
     },
 
     /**

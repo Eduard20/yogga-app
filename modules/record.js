@@ -30,16 +30,17 @@ const record = {
 
     /**
      * Edit Function For Record
+     * @param {String} id
      * @param {Object} data
      * @param {Function} next
      * @returns {*}
      */
 
-    edit: (data, next) => {
+    edit: (id, data, next) => {
 
         if (_.isEmpty(data)) return next({message: text.validationError});
 
-        mongoRequests.editRecord(data, (err, data) => {
+        mongoRequests.editRecord(id, data, (err, data) => {
             if (err) return next(null);
             return next(data)
         });
@@ -48,16 +49,16 @@ const record = {
 
     /**
      * Delete Function For Record
-     * @param {Object} data
+     * @param {String} id
      * @param {Function} next
      * @returns {*}
      */
 
-    delete: (data, next) => {
+    delete: (id, next) => {
 
-        if (_.isEmpty(data)) return next({message: text.validationError});
+        if (_.isEmpty(id)) return next({message: text.validationError});
 
-        mongoRequests.deleteRecord(data._id, err => {
+        mongoRequests.deleteRecord(id, err => {
             if (err) {
                 winston.log('error', err);
                 return next(null)
