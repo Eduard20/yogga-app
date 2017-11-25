@@ -139,7 +139,9 @@ const queries = {
 
     deleteRecord: (id, next) => {
         RecordsModel.findByIdAndRemove(id, err => next(err))
-    }
+    },
+
+
 
 };
 
