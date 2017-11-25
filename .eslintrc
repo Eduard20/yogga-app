@@ -1,6 +1,6 @@
 {
-  "extends": "rallycoding",
-  "rules": {
-    "yoda": [2, "always"]
-  }
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended"
+  ]
 }
