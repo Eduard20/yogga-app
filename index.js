@@ -1,11 +1,20 @@
+
+/**
+ * Module Dependencies
+ */
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const winston = require('winston');
 // const webpack = require('webpack');
 const logger = require('morgan');
 const config = require('./config');
-const routes = require('./routes/index');
+const auth = require('./middlewares/auth').isAuth;
 process.env.NODE_ENV = config.mode;
+
+const routes = require('./routes/index');
+const api = require('./routes/api');
+
 const app = express();
 // const webPackConfig = require('./webpack.config');
 //
@@ -15,10 +24,26 @@ const app = express();
 //     publicPath: webPackConfig.output.publicPath
 // }));
 // app.use(require('webpack-hot-middleware')(compiler));
+/**
+ * Authentication Middleware
+ */
+
+app.use('/api', auth);
+
+/**
+ * Other Middleware
+ */
+
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(logger('dev'));
+
 app.use('/', routes);
+app.use('/api', api);
+
+/**
+ * Middleware For Not Found
+ */
 
 app.use((req, res, next) => {
     const err = new Error('Not Found');
