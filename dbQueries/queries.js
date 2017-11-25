@@ -110,8 +110,34 @@ const queries = {
             }, err => next(err));
     },
 
+    /**
+     * Add Record
+     * @param {Object} data
+     * @param {Function} next
+     */
+
     addRecord: (data, next) => {
         RecordsModel.create(data, (err, doc) => err ? next(err) : next(err, doc));
+    },
+
+    /**
+     * Edit Record
+     * @param {Object} data
+     * @param {Function} next
+     */
+
+    editRecord: (data, next) => {
+        RecordsModel.update({ _id: data._id }, data, err => err ? next(err) : next(err, data));
+    },
+
+    /**
+     * Delete Record
+     * @param {String} id
+     * @param {Function} next
+     */
+
+    deleteRecord: (id, next) => {
+        RecordsModel.findByIdAndRemove(id, err => next(err))
     }
 
 };

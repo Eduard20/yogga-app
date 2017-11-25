@@ -19,11 +19,11 @@ router.post('/record', (req, res) => {
 });
 
 router.put('/record', (req, res) => {
-
+    recordFunction.edit(req.body, result => res.send(result));
 });
 
 router.delete('/record', (req, res) => {
-
+    recordFunction.delete(req.body, result => res.send(result));
 });
 
 module.exports = router;
