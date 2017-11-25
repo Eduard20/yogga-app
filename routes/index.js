@@ -26,4 +26,5 @@ router.post('/register', (req, res, next) => {
     }
     return res.send({ error: true, message: texts.validationError });
 });
+
 module.exports = router;

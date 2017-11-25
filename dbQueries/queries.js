@@ -1,8 +1,13 @@
+
+/**
+ * Module Dependencies
+ */
+
 const mongoose = require('mongoose');
 const config = require('../config');
 const winston = require('winston');
 const text = require('../tetxs/index');
-// const async = require('async');
+const async = require('async');
 const _ = require('lodash');
 const tokenFunction = require('../modules/token');
 const {
