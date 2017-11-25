@@ -2,6 +2,7 @@
   "name": "soshace",
   "version": "0.1.0",
   "private": true,
+  "author": "Eduard Simonyan",
   "dependencies": {
     "antd": "^2.13.10",
     "async": "^2.6.0",
@@ -20,11 +21,14 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
+    "test": "mocha tests/index.js",
     "eject": "react-scripts eject"
   },
   "devDependencies": {
+    "chai": "^4.1.2",
     "eslint": "^4.11.0",
-    "eslint-plugin-react": "^7.5.1"
+    "eslint-plugin-react": "^7.5.1",
+    "mocha": "^4.0.1",
+    "superagent": "^3.8.1"
   }
 }
