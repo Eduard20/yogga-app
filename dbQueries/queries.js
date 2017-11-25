@@ -141,6 +141,16 @@ const queries = {
         RecordsModel.findByIdAndRemove(id, err => next(err))
     },
 
+    /**
+     * Get Records
+     * @param {String} email
+     * @param {Function} next
+     */
+
+    getRecords: (email, next) => {
+        RecordsModel.find(email, null, { lean: true })
+            .then(doc => next(null, doc), err => next(err))
+    }
 
 
 };

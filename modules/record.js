@@ -8,6 +8,7 @@ const _ = require('lodash');
 const text = require('../tetxs/index');
 const mongoRequests = require('../dbQueries/queries');
 const helperFunction = require('./helper');
+const tokenFunction = require('./token');
 
 const record = {
 
@@ -68,6 +69,29 @@ const record = {
             return next(true)
         });
 
+    },
+
+    /**
+     * Get Function For Records
+     * @param token
+     * @param next
+     */
+
+    get: (token, next) => {
+        const email = tokenFunction.decode(token);
+        mongoRequests.getRecords(email, (err, data) => {
+            if (err) {
+                winston.log('error', err);
+                return next({
+                    status: 'Failed',
+                    error: err
+                })
+            }
+            return next({
+                status: 'OK',
+                payload: data
+            });
+        })
     }
 
 };

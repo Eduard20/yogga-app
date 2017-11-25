@@ -11,7 +11,7 @@ router.get('/', (req, res) => {
 });
 
 router.get('/records', (req, res) => {
-
+    recordFunction.get(req.headers.authorization, result => res.send(result));
 });
 
 router.post('/record', (req, res) => {
