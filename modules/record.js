@@ -73,8 +73,8 @@ const record = {
 
     /**
      * Get Function For Records
-     * @param token
-     * @param next
+     * @param {String} token
+     * @param {Function} next
      */
 
     get: (token, next) => {
