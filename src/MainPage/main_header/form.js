@@ -21,7 +21,7 @@ class HorizontalLoginForm extends React.Component {
                 console.log('Received values of form: ', values);
             }
         });
-    }
+    };
     render() {
         const { getFieldDecorator, getFieldsError, getFieldError, isFieldTouched } = this.props.form;
 
