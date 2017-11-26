@@ -1,10 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './MainPage/App';
-import RecordsRout from './RecordsReports/index';
+import './index.css';
+import App from './root/App';
 import { BrowserRouter } from 'react-router-dom';
 
-ReactDOM.render(
+ReactDOM.render((
     <BrowserRouter>
-        <RecordsRout />
-    </BrowserRouter>, document.getElementById('root'));
+        <App />
+    </BrowserRouter>
+), document.getElementById('root'));

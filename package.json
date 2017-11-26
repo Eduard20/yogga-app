@@ -12,10 +12,12 @@
     "lodash": "^4.17.4",
     "mongoose": "^4.10.0",
     "morgan": "^1.9.0",
+    "prop-types": "^15.6.0",
     "react": "^16.1.1",
     "react-dom": "^16.1.1",
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.0.17",
+    "react-virtualized": "^9.13.0",
     "winston": "^2.4.0"
   },
   "scripts": {
