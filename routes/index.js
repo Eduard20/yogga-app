@@ -5,7 +5,7 @@ const texts = require('../tetxs/index');
 
 router.get('/favicon.ico', (req, res) => res.sendStatus(200));
 
-router.post('/login', (req, res, next) => {
+router.post('/registration-page', (req, res, next) => {
     if (req.body.email && req.body.password) {
         mongoRequests.login(req.body, (err, result) => {
             if (err) return next(err);

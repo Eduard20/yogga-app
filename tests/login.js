@@ -7,7 +7,7 @@ const should = require('chai').should();
 const superagent = require('superagent');
 const host = 'http://127.0.0.1:3000';
 
-describe('login: negative cases', () => {
+describe('registration-page: negative cases', () => {
     it('It should answer that parameters are missing', done => {
 
         const body = {
@@ -66,8 +66,8 @@ describe('login: negative cases', () => {
     });
 });
 
-describe('login: positive case', () => {
-    it('It should successfully login', done => {
+describe('registration-page: positive case', () => {
+    it('It should successfully registration-page', done => {
 
         const body = {
             email: 'esimonyan2014@gmail.com',
