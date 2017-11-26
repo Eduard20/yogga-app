@@ -1,5 +1,5 @@
 
-import withoutToken from 'packages/without-token';
+import withoutToken from '../packages/without-token';
 
 export const Login = loginInfo => {
     const uri = '/registration-page';
