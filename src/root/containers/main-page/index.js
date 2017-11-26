@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import Reports from '../reports';
+import Records from '../records';
 import './styles.css';
 
 export default class MainPage extends Component {
@@ -24,6 +26,9 @@ export default class MainPage extends Component {
                     <div>
                         <span className="buttonStyles" onClick={this.showReports}>Reports</span>
                         <span className="buttonStyles" onClick={this.showRecords}>Records</span>
+                    </div>
+                    <div>
+                        { this.state.showReports ? <Reports /> : <Records />}
                     </div>
                 </div>
                 <div style={{

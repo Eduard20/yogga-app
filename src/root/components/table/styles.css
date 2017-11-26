@@ -1,0 +1,9 @@
+.virtualized-table .ReactVirtualized__Table__headerRow,
+.virtualized-table .ReactVirtualized__Table__Grid {
+    border: 1px solid gray;
+    outline: none!important;
+}
+
+.virtualized-table .ReactVirtualized__Table__sortableHeaderColumn {
+    outline: none!important;
+}
