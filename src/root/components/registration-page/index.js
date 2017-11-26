@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import './styles.css'
-
 import { Form, Input, Button, } from 'antd';
+import { Register } from '../../../api/Register';
 const FormItem = Form.Item;
 
 
@@ -9,11 +9,20 @@ class RegistrationForm extends React.Component {
     state = {
         confirmDirty: false,
     };
-    handleSubmit = (e) => {
+    handleSubmit = e => {
         e.preventDefault();
         this.props.form.validateFieldsAndScroll((err, values) => {
             if (!err) {
-                console.log('Received values of form: ', values);
+                const Data = {
+                    name: values.name,
+                    surname: values.surname,
+                    email: values.email,
+                    password: values.password
+                };
+                console.log(Data);
+                Register(Data)
+                    .then(r => console.log(r));
+                // console.log('Received values of form: ', values);
             }
         });
     };
@@ -84,10 +93,10 @@ class RegistrationForm extends React.Component {
                         {...formItemLayout}
                         hasFeedback
                     >
-                        {getFieldDecorator('Surname', {
+                        {getFieldDecorator('surname', {
                             rules: [{ required: true, message: 'Please input your Surname!', whitespace: true }],
                         })(
-                            <Input placeholder="Surname"/>
+                            <Input placeholder="surname"/>
                         )}
                     </FormItem>
                     <FormItem

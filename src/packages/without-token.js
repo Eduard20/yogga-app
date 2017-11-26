@@ -26,7 +26,7 @@ export default class withoutToken {
         return _.cloneDeep(baseSettings);
     }
 
-    static fetch(relative, m = 'GET', data = null, opt = null) {
+    static fetch(relative, m='GET', data = null, opt = null) {
 
         // UpperCase() Type and check for valid entry
         const method = m.toUpperCase();
@@ -70,13 +70,14 @@ export default class withoutToken {
 
         }
         // Fire the Request and Return the response promise Object
-        return fetch(new Request(uri)).then(response => {
-            if (response.ok) {
-                return response;
-            }
-            response.json().then(r => {
-                throw new ApiError(r.ExceptionMessage);
-            });
+        return fetch(new Request(uri, options))
+            .then(response => {
+                if (response.ok) {
+                    return response;
+                }
+                response.json().then(r => {
+                    throw new ApiError(r.ExceptionMessage);
+                });
         });
     }
 
