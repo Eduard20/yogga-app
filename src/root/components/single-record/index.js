@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import './form.css'
 import { LocaleProvider } from 'antd';
 import enUS from 'antd/lib/locale-provider/en_US';
+import { AddRecord } from '../../../api/Record';
 
 import { Form, Input, Button,DatePicker,TimePicker } from 'antd';
 import moment from 'moment';
@@ -14,10 +15,19 @@ class RegistrationForm extends React.Component {
         e.preventDefault();
         this.props.form.validateFieldsAndScroll((err, values) => {
             if (!err) {
-                console.log('Received values of form: ', values);
+                const Data = {
+                    dist: values.Distance,
+                    date: values.Date,
+                    time: values.Time
+                };
+                console.log(Data);
+                AddRecord(Data)
+                    .then(r => console.log(r));
+                // console.log('Received values of form: ', values);
             }
         });
-    }
+    };
+
     render() {
         const { getFieldDecorator } = this.props.form;
 

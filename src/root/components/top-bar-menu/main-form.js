@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-
+import React, { Component } from 'react';
+import { Login } from '../../../api/Login';
 import 'antd/dist/antd.css';
 
 import { Form, Input, Button } from 'antd';
@@ -19,7 +19,13 @@ class HorizontalLoginForm extends React.Component {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
-                console.log('Received values of form: ', values);
+                const Data = {
+                    email: values.email,
+                    password: values.password
+                };
+                Login(Data)
+                    .then(r => console.log(r));
+                // console.log('Received values of form: ', values);
             }
         });
     };

@@ -49,7 +49,7 @@ app.use((req, res, next) => {
 
 app.use((err, req, res, next) => {
     if (404 === err.status) {
-        return res.sendFile(`${__diname}/build/index.html`);
+        return res.sendFile(`${__dirname}/build/index.html`);
     }
 
     res.status(err.status || 500);
