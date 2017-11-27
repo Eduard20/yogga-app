@@ -28,6 +28,7 @@ app.use('/api', auth);
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(logger('dev'));
+app.use(express.static('build'));
 
 app.use('/', routes);
 app.use('/api', api);
@@ -42,19 +43,15 @@ app.use((req, res, next) => {
     next(err);
 });
 
-
-if ('development' === process.env.NODE_ENV) {
-    app.use((err, req, res, next) => {
-        res.status(err.status || 500);
-        res.json({message: err.message, error: err});
-    });
-}
-
 /**
  * production error handler
  */
 
 app.use((err, req, res, next) => {
+    if (404 === err.status) {
+        return res.sendFile(`${__diname}/build/index.html`);
+    }
+
     res.status(err.status || 500);
     res.json({message: err.message, error: {}});
 });
