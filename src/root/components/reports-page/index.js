@@ -12,12 +12,7 @@ export default class ReportsPage extends Component {
             },
             {
                 Name: 'Average distance',
-                DataKey: 'avg_dist',
-                Width: 250
-            },
-            {
-                Name: 'Average Speed',
-                DataKey: 'avg_speed',
+                DataKey: 'dist',
                 Width: 250
             }
         ]

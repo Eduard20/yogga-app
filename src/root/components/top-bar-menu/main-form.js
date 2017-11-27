@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Login } from '../../../api/Login';
+import PropTypes from 'prop-types';
 import 'antd/dist/antd.css';
+
 
 import { Form, Input, Button } from 'antd';
 const FormItem = Form.Item;
@@ -10,6 +12,9 @@ function hasErrors(fieldsError) {
 }
 
 class HorizontalLoginForm extends React.Component {
+    static contextTypes = {
+        router: PropTypes.object
+    };
     componentDidMount() {
         // To disabled submit button at the beginning.
         this.props.form.validateFields();
@@ -24,7 +29,12 @@ class HorizontalLoginForm extends React.Component {
                     password: values.password
                 };
                 Login(Data)
-                    .then(r => console.log(r));
+                    .then(doc => {
+                        document.cookie = `token=${doc.token}`;
+                        this.context.router.history.push(`/main`);
+                    }, err => {
+                        console.error(err);
+                    });
                 // console.log('Received values of form: ', values);
             }
         });

@@ -1,5 +1,6 @@
 
 import _ from 'lodash';
+import { getCookie } from "../root/helpers/cookie";
 
 const baseSettings = {
     method: 'GET',
@@ -51,8 +52,11 @@ export default class api {
             options = _.extend(true, options, requestOptions);
         }
 
+        const token = getCookie('token');
+
         // necessary to get the new API response format
         options.headers['X-Api-Version'] = '2';
+        options.headers['Authorization'] = token;
 
         // We want to send JSON and actually have data to send?
         // if (options.dataType.indexOf('json') === 0) {
@@ -71,7 +75,7 @@ export default class api {
         }
 
         // Fire the Request and Return the response promise Object
-        return fetch(new Request(uri)).then(response => {
+        return fetch(new Request(uri, options)).then(response => {
             if (response.ok) {
                 return response;
             }

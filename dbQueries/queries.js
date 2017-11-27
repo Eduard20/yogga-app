@@ -83,14 +83,14 @@ const queries = {
 
             (doc, callback) => {
                 if (!_.isEmpty(doc)) return callback(null, doc);
-                callback({ error: true, message: text.usernameIncorrect, status: 200 });
+                callback({ error: true, message: text.dataIncorrect, status: 200 });
             },
 
             (doc, callback) => {
                 if (data.password === doc.password) {
                     return callback(null, doc);
                 }
-                callback({ error: true, message: text.passwordIncorrect, status: 200 });
+                callback({ error: true, message: text.dataIncorrect, status: 200 });
             }
 
         ], (err, result) => err ? next(err) : next(null, result));

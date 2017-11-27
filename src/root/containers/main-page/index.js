@@ -2,14 +2,23 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import Reports from '../reports';
 import Records from '../records';
+import { GetRecords } from '../../../api/Record';
 import './styles.css';
 
 export default class MainPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            showReports: true
+            showReports: true,
+            records: []
         }
+    }
+
+    componentWillMount(){
+        GetRecords()
+            .then(doc => {
+                this.setState({ records: doc.payload })
+            }, err => console.error(err));
     }
 
     showReports = () => this.setState({ showReports: true });
@@ -28,7 +37,10 @@ export default class MainPage extends Component {
                         <span className="buttonStyles" onClick={this.showRecords}>Records</span>
                     </div>
                     <div>
-                        { this.state.showReports ? <Reports /> : <Records />}
+                        { this.state.showReports
+                            ? <Reports list={this.state.records} />
+                            : <Records list={this.state.records} />
+                        }
                     </div>
                 </div>
                 <div style={{

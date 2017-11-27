@@ -43,7 +43,7 @@ export default class Records extends Component {
     render() {
         return (
             <RecordsPage
-                list={data}
+                list={this.props.list}
             />
         )
     }

@@ -3,8 +3,7 @@ import './form.css'
 import { LocaleProvider } from 'antd';
 import enUS from 'antd/lib/locale-provider/en_US';
 import { AddRecord } from '../../../api/Record';
-
-import { Form, Input, Button,DatePicker,TimePicker } from 'antd';
+import { Form, Input, Button, DatePicker,TimePicker } from 'antd';
 import moment from 'moment';
 
 const FormItem = Form.Item;
@@ -17,8 +16,8 @@ class RegistrationForm extends React.Component {
             if (!err) {
                 const Data = {
                     dist: values.Distance,
-                    date: values.Date,
-                    time: values.Time
+                    date: values['date-picker']._d,
+                    time: values.Time._d
                 };
                 console.log(Data);
                 AddRecord(Data)
@@ -53,6 +52,9 @@ class RegistrationForm extends React.Component {
                 },
             },
         };
+        const config = {
+            rules: [{ type: 'object', required: true, message: 'Please select time!' }],
+        };
 
         return (
             <div className="createform">
@@ -60,13 +62,10 @@ class RegistrationForm extends React.Component {
                 <Form onSubmit={this.handleSubmit}>
                     <FormItem
                         {...formItemLayout}
-                        hasFeedback
                     >
-
-                        <LocaleProvider locale={enUS}>
-                            <DatePicker defaultValue={moment('08/08/2017', dateFormat)} format={dateFormat} placeholder='Date'/>
-                        </LocaleProvider>
-
+                        {getFieldDecorator('date-picker', config)(
+                                <DatePicker />
+                        )}
                     </FormItem>
                     <FormItem
                         {...formItemLayout}
@@ -82,7 +81,11 @@ class RegistrationForm extends React.Component {
                         {...formItemLayout}
                         hasFeedback
                     >
-                        <TimePicker defaultValue={moment('00:00:00', 'hh:mm:ss')} placeholder='Time'/>
+                        {getFieldDecorator('Time', {
+                            rules: [{ required: true, message: 'Please input time!' }],
+                        })(
+                            <TimePicker defaultValue={moment('00:00:00', 'hh:mm:ss')} placeholder='Time'/>
+                        )}
                     </FormItem>
                     <FormItem {...tailFormItemLayout}>
                         <Button type="primary" htmlType="submit">{this.props.id ? 'Save' : 'Add'}</Button>
@@ -93,6 +96,6 @@ class RegistrationForm extends React.Component {
     }
 }
 
-const AddRecord = Form.create()(RegistrationForm);
+const AddRecordForm = Form.create()(RegistrationForm);
 
-export default AddRecord
+export default AddRecordForm

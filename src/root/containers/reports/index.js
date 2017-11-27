@@ -38,7 +38,7 @@ export default class Reports extends Component {
     render() {
         return (
             <ReportsPage
-                list={data}
+                list={this.props.list}
             />
         )
     }
