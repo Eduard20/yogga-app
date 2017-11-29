@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Column, Table, SortDirection } from 'react-virtualized';
 import { Icon } from 'antd';
 import PropTypes from 'prop-types';
+import { DeleteRecord } from "../../../api/Record";
 import moment from 'moment';
 import lodashSort from 'lodash/sortBy';
 import reverse from 'lodash/reverse';
@@ -41,7 +42,13 @@ export default class ReusableTable extends Component {
         this.context.router.history.push(`/main/record/${rowData._id}`);
     };
 
-    deleteRecord = rowData => () => console.log(rowData);
+    deleteRecord = rowData => () => {
+        console.log(rowData);
+        DeleteRecord(rowData._id)
+            .then(doc => {
+                console.log(doc);
+            }, err => console.error(err));
+    };
 
     render() {
         const { sort } = this.state;
