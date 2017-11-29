@@ -4,39 +4,16 @@ import RecordsPage from '../../components/records-page/index';
 const data = [
     {
         _id: 1,
-        date: '08.07.2015',
-        distance: 100,
-        time: 110,
-        speed: 116,
+        "dist": "450",
+        "date": "2017-11-09T07:37:45.353Z",
+        "time": "2017-11-29T07:40:33.000Z",
     },
     {
         _id: 2,
-        date: '04.07.2017',
-        distance: 100,
-        time: 110,
-        speed: 116,
-    },
-    {
-        _id: 3,
-        date: '08.07.2015',
-        distance: 100,
-        time: 110,
-        speed: 116,
-    },
-    {
-        _id: 4,
-        date: '03.07.2018',
-        distance: 100,
-        time: 110,
-        speed: 116,
-    },
-    {
-        _id: 5,
-        date: '09.07.2015',
-        distance: 100,
-        time: 110,
-        speed: 116,
-    },
+        "dist": "450",
+        "date": "2017-11-09T07:37:45.353Z",
+        "time": "2017-11-29T07:40:33.000Z",
+    }
 ];
 
 export default class Records extends Component {

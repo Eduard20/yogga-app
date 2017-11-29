@@ -9,6 +9,7 @@ const text = require('../tetxs/index');
 const mongoRequests = require('../dbQueries/queries');
 const helperFunction = require('./helper');
 const tokenFunction = require('./token');
+const moment = require('moment');
 
 const record = {
 
@@ -24,6 +25,12 @@ const record = {
         if (_.isEmpty(data)) return next({message: text.validationError});
 
         const Data = helperFunction.addEmail(token, data);
+        Data.date = moment(Data.date).format('L');
+        Data.time = moment(Data.time).format('HH:mm:ss');
+
+        const minutes = moment(Data.time, 'HH:mm:ss').diff(moment().startOf('day'), 'minutes');
+
+        Data.speed = Math.floor(Data.dist / minutes);
 
         mongoRequests.addRecord(Data, (err, data) => {
             if (err) return next(null);

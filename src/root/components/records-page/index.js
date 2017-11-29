@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Table from '../table';
 
-export default class ReportsPage extends Component {
+export default class RecordsPage extends Component {
     constructor(props) {
         super(props);
         this.headerColumns = [
@@ -18,6 +18,11 @@ export default class ReportsPage extends Component {
             {
                 Name: 'Time',
                 DataKey: 'time',
+                Width: 250
+            },
+            {
+                Name: 'Average Speed',
+                DataKey: 'speed',
                 Width: 250
             },
             {
