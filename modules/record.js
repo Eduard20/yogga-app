@@ -49,6 +49,12 @@ const record = {
         if (_.isEmpty(req.body)) return next({message: text.validationError});
 
         const data = helperFunction.addEmail(req.headers.authorization, req.body);
+        data.date = moment(data.date).format('L');
+        data.time = moment(data.time).format('HH:mm:ss');
+
+        const minutes = moment(data.time, 'HH:mm:ss').diff(moment().startOf('day'), 'minutes');
+
+        data.speed = Math.floor(data.dist / minutes);
 
         mongoRequests.editRecord(req.params.id, data, (err, data) => {
             if (err) return next(null);
@@ -87,6 +93,29 @@ const record = {
     get: (token, next) => {
         const email = tokenFunction.decode(token);
         mongoRequests.getRecords(email, (err, data) => {
+            if (err) {
+                winston.log('error', err);
+                return next({
+                    status: 'Failed',
+                    error: err
+                })
+            }
+            return next({
+                status: 'OK',
+                payload: data
+            });
+        })
+    },
+
+    /**
+     * Get Function For Single Record
+     * @param {Object} req
+     * @param {Function} next
+     */
+
+    getOne: (req, next) => {
+        const email = tokenFunction.decode(req.headers.authorization);
+        mongoRequests.getOne(email, req.params.id, (err, data) => {
             if (err) {
                 winston.log('error', err);
                 return next({

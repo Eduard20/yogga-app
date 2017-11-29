@@ -41,6 +41,7 @@ export default class RecordsPage extends Component {
     render() {
         return (
             <Table
+                updateTable={this.props.updateTable}
                 headerColumns={this.headerColumns}
                 list={this.props.list}
             />

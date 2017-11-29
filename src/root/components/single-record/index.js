@@ -2,14 +2,37 @@ import React, { Component } from 'react'
 import './form.css'
 import { LocaleProvider } from 'antd';
 import enUS from 'antd/lib/locale-provider/en_US';
-import { AddRecord } from '../../../api/Record';
+import { AddRecord, EditRecord } from '../../../api/Record';
 import { Form, Input, Button, DatePicker,TimePicker } from 'antd';
+import PropTypes from 'prop-types';
 import moment from 'moment';
+import isEqual from 'lodash/isEqual'
 
 const FormItem = Form.Item;
 const dateFormat = 'DD/MM/YYYY';
 
 class RegistrationForm extends React.Component {
+    static contextTypes = {
+        router: PropTypes.object
+    };
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            key: 0,
+            record: props.record,
+        }
+    }
+
+    componentWillReceiveProps(nextProps) {
+        if (!isEqual(nextProps.record, this.props.record)) {
+            this.setState({
+                record: nextProps.record,
+                key: this.state.key + 1
+            })
+        }
+    }
+
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.form.validateFieldsAndScroll((err, values) => {
@@ -19,17 +42,19 @@ class RegistrationForm extends React.Component {
                     date: values['date-picker']._d,
                     time: values.Time._d
                 };
-                console.log(Data);
-                AddRecord(Data)
-                    .then(r => console.log(r));
-                // console.log('Received values of form: ', values);
+                if (this.props.id) {
+                    EditRecord(this.props.id, Data)
+                } else {
+                    AddRecord(Data)
+                }
+                this.props.updateTable && this.props.updateTable();
+                this.context.router.history.push(`/main`);
             }
         });
     };
 
     render() {
         const { getFieldDecorator } = this.props.form;
-
         const formItemLayout = {
             labelCol: {
                 xs: { span: 24 },
@@ -52,19 +77,18 @@ class RegistrationForm extends React.Component {
                 },
             },
         };
-        const config = {
-            rules: [{ type: 'object', required: true, message: 'Please select time!' }],
-        };
 
         return (
-            <div className="createform">
+            <div key={this.state.key} className="createform">
                 <h2>{this.props.id ? 'Edit' : 'Add'} Record</h2>
                 <Form onSubmit={this.handleSubmit}>
                     <FormItem
                         {...formItemLayout}
                     >
-                        {getFieldDecorator('date-picker', config)(
-                                <DatePicker />
+                        {getFieldDecorator('date-picker', {
+                            rules: [{ type: 'object', required: true, message: 'Please select time!' }],
+                        })(
+                            <DatePicker placeholder='Date'/>
                         )}
                     </FormItem>
                     <FormItem
@@ -72,7 +96,7 @@ class RegistrationForm extends React.Component {
                         hasFeedback
                     >
                         {getFieldDecorator('Distance', {
-                            rules: [{ required: true, message: 'Please input distance!', whitespace: true }],
+                            rules: [{ required: true, message: 'Please input distance!', whitespace: true }]
                         })(
                             <Input placeholder="Distance"/>
                         )}
@@ -82,13 +106,17 @@ class RegistrationForm extends React.Component {
                         hasFeedback
                     >
                         {getFieldDecorator('Time', {
-                            rules: [{ required: true, message: 'Please input time!' }],
+                            rules: [{ required: true, message: 'Please input time!' }]
                         })(
-                            <TimePicker defaultValue={moment('00:00:00', 'hh:mm:ss')} placeholder='Time'/>
+                            <TimePicker placeholder='Time'/>
                         )}
                     </FormItem>
+
                     <FormItem {...tailFormItemLayout}>
-                        <Button type="primary" htmlType="submit">{this.props.id ? 'Save' : 'Add'}</Button>
+                        <Button
+                            type="primary"
+                            htmlType="submit"
+                        >{this.props.id ? 'Save' : 'Add'}</Button>
                     </FormItem>
                 </Form>
             </div>

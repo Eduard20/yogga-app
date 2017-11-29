@@ -16,8 +16,13 @@ export const DeleteRecord = Guid => {
     return api.delete(uri).then(response => response.json());
 };
 
-export const EditRecord = Guid => {
+export const EditRecord = (Guid, data) => {
     const uri = `/record/${Guid}`;
-    return api.post(uri).then(response => response.json());
+    return api.put(uri, data).then(response => response.json());
+};
+
+export const GetSingleRecord = Guid => {
+    const uri = `/record/${Guid}`;
+    return api.get(uri).then(response => response.json());
 };
 

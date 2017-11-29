@@ -150,6 +150,18 @@ const queries = {
     getRecords: (email, next) => {
         RecordsModel.find(email, null, { lean: true })
             .then(doc => next(null, doc), err => next(err))
+    },
+
+    /**
+     * Get Record By Id
+     * @param {String} email
+     * @param {String} _id
+     * @param {Function} next
+     */
+
+    getOne: (email, _id, next) => {
+        RecordsModel.findOne({email, _id}, null, { lean: true })
+            .then(doc => next(null, doc), err => next(err))
     }
 
 

@@ -15,11 +15,19 @@ export default class MainPage extends Component {
     }
 
     componentWillMount(){
+        this.updateRecords();
+    }
+
+    updateTable = () => {
+        this.updateRecords();
+    };
+
+    updateRecords = () => {
         GetRecords()
             .then(doc => {
                 this.setState({ records: doc.payload })
             }, err => console.error(err));
-    }
+    };
 
     showReports = () => this.setState({ showReports: true });
 
@@ -39,7 +47,7 @@ export default class MainPage extends Component {
                     <div>
                         { this.state.showReports
                             ? <Reports list={this.state.records} />
-                            : <Records list={this.state.records} />
+                            : <Records updateTable={this.updateTable} list={this.state.records} />
                         }
                     </div>
                 </div>

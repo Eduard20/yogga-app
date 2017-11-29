@@ -14,6 +14,10 @@ router.get('/records', (req, res) => {
     recordFunction.get(req.headers.authorization, result => res.send(result));
 });
 
+router.get('/record/:id', (req, res) => {
+    recordFunction.getOne(req, result => res.send(result));
+});
+
 router.post('/record', (req, res) => {
     recordFunction.add(req.headers.authorization, req.body, result => res.send(result));
 });

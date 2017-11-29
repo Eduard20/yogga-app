@@ -30,8 +30,10 @@ class HorizontalLoginForm extends React.Component {
                 };
                 Login(Data)
                     .then(doc => {
-                        document.cookie = `token=${doc.token}`;
-                        this.context.router.history.push(`/main`);
+                        if (doc.token) {
+                            document.cookie = `token=${doc.token}`;
+                            this.context.router.history.push(`/main`);
+                        }
                     }, err => {
                         console.error(err);
                     });
