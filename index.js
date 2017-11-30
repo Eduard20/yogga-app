@@ -16,11 +16,6 @@ const routes = require('./routes/index');
 const api = require('./routes/api');
 
 const app = express();
-/**
- * Authentication Middleware
- */
-
-app.use('/api', auth);
 
 /**
  * Other Middleware
@@ -43,6 +38,12 @@ app.use((req, res, next) => {
     }
     next();
 });
+
+/**
+ * Authentication Middleware
+ */
+
+app.use('/api', auth);
 
 app.use('/', routes);
 app.use('/api', api);

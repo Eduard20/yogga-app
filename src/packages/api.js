@@ -4,7 +4,6 @@ import { getCookie } from "../root/helpers/cookie";
 
 const baseSettings = {
     method: 'GET',
-    credentials: 'include',
     headers: {
         'Content-Type': 'application/json'
     }
