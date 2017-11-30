@@ -148,7 +148,7 @@ const queries = {
      */
 
     getRecords: (email, next) => {
-        RecordsModel.find(email, null, { lean: true })
+        RecordsModel.find({email}, null, { lean: true })
             .then(doc => next(null, doc), err => next(err))
     },
 
