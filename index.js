@@ -30,6 +30,16 @@ app.use(bodyParser.json());
 app.use(logger('dev'));
 app.use(express.static(`${__dirname}/build`));
 
+app.use((req, res, next) => {
+    if ("OPTIONS" === req.method) {
+        if (req.headers["access-control-request-headers"]) {
+            res.header("Access-Control-Allow-Headers", req.headers["access-control-request-headers"]);
+        }
+        return res.send();
+    }
+    next();
+});
+
 app.use('/', routes);
 app.use('/api', api);
 
