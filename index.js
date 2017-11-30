@@ -7,6 +7,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const winston = require('winston');
 const logger = require('morgan');
+const cors = require('cors');
 const config = require('./config');
 const auth = require('./middlewares/auth').isAuth;
 process.env.NODE_ENV = config.mode;
@@ -29,7 +30,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(logger('dev'));
 app.use(express.static(`${__dirname}/build`));
-
+app.use(cors());
 app.use((req, res, next) => {
     if ("OPTIONS" === req.method) {
         if (req.headers["access-control-request-headers"]) {
