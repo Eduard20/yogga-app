@@ -92,7 +92,6 @@ const record = {
 
     get: (token, next) => {
         const email = tokenFunction.decode(token);
-        console.log(email);
         mongoRequests.getRecords(email, (err, data) => {
             if (err) {
                 winston.log('error', err);

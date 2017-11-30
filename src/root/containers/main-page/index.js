@@ -9,7 +9,7 @@ export default class MainPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            showReports: true,
+            showReports: false,
             records: []
         }
     }
@@ -25,6 +25,7 @@ export default class MainPage extends Component {
     updateRecords = () => {
         GetRecords()
             .then(doc => {
+                console.log(doc.payload);
                 this.setState({ records: doc.payload })
             }, err => console.error(err));
     };
@@ -51,14 +52,18 @@ export default class MainPage extends Component {
                         }
                     </div>
                 </div>
-                <div style={{
-                    display: 'inline-block',
-                    verticalAlign: 'top'
-                }}>
+                    {
+                        !this.state.showReports
+                        ? <div style={{
+                                display: 'inline-block',
+                                verticalAlign: 'top'
+                            }}>
                     <span className="buttonStyles">
                         <Link to={'/main/record'}>Add</Link>
                     </span>
-                </div>
+                            </div>
+                            : <div></div>
+                    }
             </div>
         )
     }

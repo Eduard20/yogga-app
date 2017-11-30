@@ -48,7 +48,9 @@ class RegistrationForm extends React.Component {
                     AddRecord(Data)
                 }
                 this.props.updateTable && this.props.updateTable();
-                this.context.router.history.push(`/main`);
+                setTimeout(() => {
+                    this.context.router.history.push(`/main`);
+                }, 100);
             }
         });
     };
