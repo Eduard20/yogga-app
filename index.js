@@ -36,6 +36,7 @@ app.use((req, res, next) => {
             res.header('Access-Control-Allow-Origin', 'http://95.85.52.192');
             res.header("Access-Control-Allow-Headers", req.headers["access-control-request-headers"]);
             res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
+            res.header('Access-Control-Allow-Credentials', 'true');
         }
         return res.send();
     }
