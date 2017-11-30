@@ -20,7 +20,7 @@ ApiError.prototype.constructor = ApiError;
 
 export default class api {
     static baseURI() {
-        return `http://${window.location.hostname}:3000/api`;
+        return `http://${window.location.hostname}:3001/api`;
     }
 
     static baseSettings() {
