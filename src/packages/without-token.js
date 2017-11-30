@@ -3,7 +3,6 @@ import _ from 'lodash';
 
 const baseSettings = {
     method: 'GET',
-    credentials: 'include',
     headers: {
         'Content-Type': 'application/json'
     }
