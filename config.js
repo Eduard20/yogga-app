@@ -1,7 +1,7 @@
 
 const config = {
-    mode : "development", // production
-    port: parseInt(process.env.PORT) || 3001,
+    mode : "production", // development
+    port: parseInt(process.env.PORT) || 3000,
     hostname : "127.0.0.1",
     jwtSecret : "bvhhejhe@83r83832HHwc",
     mainMongo : {
