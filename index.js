@@ -60,7 +60,7 @@ app.use((err, req, res, next) => {
  * Application listening on PORT
  */
 
-app.listen(config.port, config.hostname, winston.log('info', `Node.js server is running at http://${config.hostname}:${config.port} 
+app.listen(config.port, winston.log('info', `Node.js server is running at http://localhost:${config.port} 
     in ${process.env.NODE_ENV} mode with process id ${process.pid}`));
 
 /**
