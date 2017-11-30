@@ -2,12 +2,16 @@ import React, { Component } from 'react'
 import './styles.css'
 import { Form, Input, Button, } from 'antd';
 import { Register } from '../../../api/Register';
+import PropTypes from 'prop-types';
 const FormItem = Form.Item;
 
 
 class RegistrationForm extends React.Component {
     state = {
         confirmDirty: false,
+    };
+    static contextTypes = {
+        router: PropTypes.object
     };
     handleSubmit = e => {
         e.preventDefault();
@@ -19,9 +23,15 @@ class RegistrationForm extends React.Component {
                     email: values.email,
                     password: values.password
                 };
-                console.log(Data);
                 Register(Data)
-                    .then(r => console.log(r));
+                    .then(doc => {
+                        if (doc.token) {
+                            document.cookie = `token=${doc.token}`;
+                            this.context.router.history.push(`/main`);
+                        }
+                    }, err => {
+                        console.error(err);
+                    });
                 // console.log('Received values of form: ', values);
             }
         });
