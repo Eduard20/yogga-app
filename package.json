@@ -35,5 +35,5 @@
     "mocha": "^4.0.1",
     "superagent": "^3.8.1"
   },
-  "proxy": "localhost:3001"
+  "proxy": "http://localhost:3001"
 }
