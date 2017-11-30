@@ -8,6 +8,7 @@ const bodyParser = require('body-parser');
 const winston = require('winston');
 const logger = require('morgan');
 const config = require('./config');
+const cors = require('cors');
 const auth = require('./middlewares/auth').isAuth;
 process.env.NODE_ENV = config.mode;
 
@@ -29,6 +30,7 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use(logger('dev'));
 app.use(express.static(`${__dirname}/build`));
+app.use(cors());
 
 app.use((req, res, next) => {
     if ("OPTIONS" === req.method) {
