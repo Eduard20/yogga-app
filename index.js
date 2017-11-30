@@ -33,7 +33,7 @@ app.use(express.static(`${__dirname}/build`));
 app.use((req, res, next) => {
     if ("OPTIONS" === req.method) {
         if (req.headers["access-control-request-headers"]) {
-            res.header('Access-Control-Allow-Origin', 'http://95.85.52.192');
+            res.header('Access-Control-Allow-Origin', '*');
             res.header("Access-Control-Allow-Headers", req.headers["access-control-request-headers"]);
             res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
             res.header('Access-Control-Allow-Credentials', 'true');
