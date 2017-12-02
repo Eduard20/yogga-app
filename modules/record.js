@@ -25,11 +25,8 @@ const record = {
         if (_.isEmpty(data)) return next({message: text.validationError});
 
         const Data = helperFunction.addEmail(token, data);
-        Data.date = moment(Data.date).format('L');
-        Data.time = moment(Data.time).format('HH:mm:ss');
-
-        const minutes = moment(Data.time, 'HH:mm:ss').diff(moment().startOf('day'), 'minutes');
-
+        const time = moment(Data.time).utc().format("hh:mm:ss");
+        const minutes = moment(time, 'hh:mm:ss').diff(moment().startOf('day'), 'minutes');
         Data.speed = Math.floor(Data.dist / minutes);
 
         mongoRequests.addRecord(Data, (err, data) => {
@@ -49,10 +46,8 @@ const record = {
         if (_.isEmpty(req.body)) return next({message: text.validationError});
 
         const data = helperFunction.addEmail(req.headers.authorization, req.body);
-        data.date = moment(data.date).format('L');
-        data.time = moment(data.time).format('HH:mm:ss');
-
-        const minutes = moment(data.time, 'HH:mm:ss').diff(moment().startOf('day'), 'minutes');
+        const time = moment(data.time).utc().format("hh:mm:ss");
+        const minutes = moment(time, 'hh:mm:ss').diff(moment().startOf('day'), 'minutes');
 
         data.speed = Math.floor(data.dist / minutes);
 
@@ -102,7 +97,11 @@ const record = {
             }
             return next({
                 status: 'OK',
-                payload: data
+                payload: data.map(item => ({
+                        ...item,
+                        time: moment(item.time).utc().format('hh:mm:ss')
+                    })
+                )
             });
         })
     },

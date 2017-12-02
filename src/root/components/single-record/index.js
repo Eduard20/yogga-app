@@ -1,17 +1,12 @@
 import React, { Component } from 'react'
 import './form.css'
-import { LocaleProvider } from 'antd';
-import enUS from 'antd/lib/locale-provider/en_US';
 import { AddRecord, EditRecord } from '../../../api/Record';
-import { Form, Input, Button, DatePicker,TimePicker } from 'antd';
+import 'rc-time-picker/assets/index.css';
 import PropTypes from 'prop-types';
-import moment from 'moment';
+import TimePicker from 'rc-time-picker';
 import isEqual from 'lodash/isEqual'
 
-const FormItem = Form.Item;
-const dateFormat = 'DD/MM/YYYY';
-
-class RegistrationForm extends React.Component {
+class SignleRecord extends Component {
     static contextTypes = {
         router: PropTypes.object
     };
@@ -21,7 +16,7 @@ class RegistrationForm extends React.Component {
         this.state = {
             key: 0,
             record: props.record,
-        }
+        };
     }
 
     componentWillReceiveProps(nextProps) {
@@ -29,103 +24,96 @@ class RegistrationForm extends React.Component {
             this.setState({
                 record: nextProps.record,
                 key: this.state.key + 1
-            })
+            });
+            console.log(nextProps.record);
         }
     }
 
     handleSubmit = (e) => {
         e.preventDefault();
-        this.props.form.validateFieldsAndScroll((err, values) => {
-            if (!err) {
-                const Data = {
-                    dist: values.Distance,
-                    date: values['date-picker']._d,
-                    time: values.Time._d
-                };
-                if (this.props.id) {
-                    EditRecord(this.props.id, Data)
-                } else {
-                    AddRecord(Data)
-                }
-                this.props.updateTable && this.props.updateTable();
-                setTimeout(() => {
+        const { record } = this.state;
+        const Data = {
+            dist: record.dist,
+            date: record.date,
+            time: record.time._d
+        };
+        if (this.props.id) {
+            EditRecord(this.props.id, Data)
+                .then(doc => {
+                    this.props.updateTable && this.props.updateTable();
                     this.context.router.history.push(`/main`);
-                }, 100);
+                })
+        } else {
+            AddRecord(Data)
+                .then(doc => {
+                    this.props.updateTable && this.props.updateTable();
+                    this.context.router.history.push(`/main`);
+                })
+        }
+    };
+
+    handleInputChange = e => {
+        e.persist();
+        this.setState(prevState => ({
+            record: {
+                ...prevState.record,
+                [e.target.name]: e.target.value,
             }
-        });
+        }));
+    };
+
+    handleTimePicker = value => {
+        this.setState(prevState => ({
+            record: {
+                ...prevState.record,
+                time: value,
+            }
+        }));
     };
 
     render() {
-        const { getFieldDecorator } = this.props.form;
-        const formItemLayout = {
-            labelCol: {
-                xs: { span: 24 },
-                sm: { span: 6 },
-            },
-            wrapperCol: {
-                xs: { span: 24 },
-                sm: { span: 7 },
-            },
-        };
-        const tailFormItemLayout = {
-            wrapperCol: {
-                xs: {
-                    span: 24,
-                    offset: 0,
-                },
-                sm: {
-                    span: 14,
-                    offset: 0,
-                },
-            },
-        };
-
         return (
             <div key={this.state.key} className="createform">
                 <h2>{this.props.id ? 'Edit' : 'Add'} Record</h2>
-                <Form onSubmit={this.handleSubmit}>
-                    <FormItem
-                        {...formItemLayout}
-                    >
-                        {getFieldDecorator('date-picker', {
-                            rules: [{ type: 'object', required: true, message: 'Please select time!' }],
-                        })(
-                            <DatePicker placeholder='Date'/>
-                        )}
-                    </FormItem>
-                    <FormItem
-                        {...formItemLayout}
-                        hasFeedback
-                    >
-                        {getFieldDecorator('Distance', {
-                            rules: [{ required: true, message: 'Please input distance!', whitespace: true }]
-                        })(
-                            <Input placeholder="Distance"/>
-                        )}
-                    </FormItem>
-                    <FormItem
-                        {...formItemLayout}
-                        hasFeedback
-                    >
-                        {getFieldDecorator('Time', {
-                            rules: [{ required: true, message: 'Please input time!' }]
-                        })(
-                            <TimePicker placeholder='Time'/>
-                        )}
-                    </FormItem>
-
-                    <FormItem {...tailFormItemLayout}>
-                        <Button
-                            type="primary"
-                            htmlType="submit"
-                        >{this.props.id ? 'Save' : 'Add'}</Button>
-                    </FormItem>
-                </Form>
+                <form onSubmit={this.handleSubmit} noValidate>
+                    <input
+                        style={styles.inputStyle}
+                        name="date"
+                        type="date"
+                        value={this.state.record.date}
+                        onChange={this.handleInputChange} />
+                    <input
+                        style={styles.inputStyle}
+                        name="dist"
+                        type="number"
+                        value={this.state.record.dist}
+                        onChange={this.handleInputChange}
+                    />
+                    <TimePicker
+                        name='time'
+                        value={this.state.record.time}
+                        onChange={this.handleTimePicker}
+                    />
+                    <input
+                        style={styles.submitStyle}
+                        type="submit" value={this.props.id ? 'Save' : 'Add'} />
+                </form>
             </div>
         );
     }
 }
 
-const AddRecordForm = Form.create()(RegistrationForm);
+const styles = {
+    inputStyle: {
+        margin: '5px 0',
+        display: 'block'
+    },
+    submitStyle: {
+        margin: '5px 0',
+        display: 'block',
+        padding: '3px 6px',
+        cursor: 'pointer'
+    }
+};
 
-export default AddRecordForm
+export default SignleRecord
