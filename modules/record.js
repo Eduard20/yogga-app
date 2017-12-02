@@ -25,10 +25,9 @@ const record = {
         if (_.isEmpty(data)) return next({message: text.validationError});
 
         const Data = helperFunction.addEmail(token, data);
-        const time = moment(Data.time).utc().format("hh:mm:ss");
+        let time = moment(Data.time).utc().format("HH:mm:ss");
         const minutes = moment(time, 'hh:mm:ss').diff(moment().startOf('day'), 'minutes');
         Data.speed = Math.floor(Data.dist / minutes);
-
         mongoRequests.addRecord(Data, (err, data) => {
             if (err) return next(null);
             return next(data)
@@ -46,7 +45,7 @@ const record = {
         if (_.isEmpty(req.body)) return next({message: text.validationError});
 
         const data = helperFunction.addEmail(req.headers.authorization, req.body);
-        const time = moment(data.time).utc().format("hh:mm:ss");
+        let time = moment(data.time).utc().format("HH:mm:ss");
         const minutes = moment(time, 'hh:mm:ss').diff(moment().startOf('day'), 'minutes');
 
         data.speed = Math.floor(data.dist / minutes);
@@ -99,7 +98,7 @@ const record = {
                 status: 'OK',
                 payload: data.map(item => ({
                         ...item,
-                        time: moment(item.time).utc().format('hh:mm:ss')
+                        time: moment(item.time).utc().format('HH:mm:ss')
                     })
                 )
             });

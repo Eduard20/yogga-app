@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Column, Table, SortDirection } from 'react-virtualized';
 import { Icon } from 'antd';
 import PropTypes from 'prop-types';
-import { DeleteRecord, GetRecords } from "../../../api/Record";
+import { DeleteRecord } from "../../../api/Record";
 import moment from 'moment';
 import lodashSort from 'lodash/sortBy';
 import reverse from 'lodash/reverse';

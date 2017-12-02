@@ -25,7 +25,6 @@ export default class MainPage extends Component {
     updateRecords = () => {
         GetRecords()
             .then(doc => {
-                console.log(doc.payload);
                 this.setState({ records: doc.payload })
             }, err => console.error(err));
     };

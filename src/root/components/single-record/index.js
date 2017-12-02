@@ -25,7 +25,6 @@ class SignleRecord extends Component {
                 record: nextProps.record,
                 key: this.state.key + 1
             });
-            console.log(nextProps.record);
         }
     }
 
