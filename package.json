@@ -12,7 +12,7 @@
     "jsonwebtoken": "^8.1.0",
     "lodash": "^4.17.4",
     "moment": "^2.19.2",
-    "mongoose": "5.8.11",
+    "mongoose": "5.7.5",
     "morgan": "^1.9.0",
     "prop-types": "^15.6.0",
     "rc-time-picker": "^3.2.1",
