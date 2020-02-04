@@ -17,7 +17,7 @@
     "prop-types": "^15.6.0",
     "rc-time-picker": "^3.2.1",
     "react": "^16.1.1",
-    "react-dom": "^16.1.1",
+    "react-dom": "^16.1.2",
     "react-router-dom": "^4.2.2",
     "react-scripts": "3.3.1",
     "react-virtualized": "^9.13.0",
